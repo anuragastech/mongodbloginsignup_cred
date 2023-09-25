@@ -1,0 +1,291 @@
+<!-- Your HTML content for the home page -->
+{{!-- <h1> user data </h1> --}}
+
+
+
+
+
+
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+  
+
+
+<style>
+  body{
+    background-color:whitesmoke;
+  }
+  .brder{
+    border: 30px solid whitesmoke;
+    border-radius: 48px;
+    height: 860px;
+    background-color:black;
+
+  }
+.head{
+  padding: 5px;
+  line-height: 10px;
+  margin-top: 80px;
+  font-size: 40px;
+  background-color: ;
+  font-weight: bolder;
+  font-family: sans-serif;
+  color: whitesmoke;
+  text-align: center;
+}
+.main{
+
+  padding-top: 100PX;
+  padding-left: 850PX;
+    display: flex;
+  
+    
+    flex-direction: row;
+  
+}
+.bttn{
+  height: 50px;
+  width: 120px;
+border: 2px solid black;
+background-color: coral;
+border-radius: 9px;
+
+}
+.bttn2{
+  height: 50px;
+  width: 120px;
+border: 2px solid black;
+background-color: rgb(65, 86, 88);
+border-radius: 9px;
+}
+.bttn3{
+  height: 50px;
+  width: 120px;
+border: 2px solid black;
+background-color: rgb(43, 24, 209);
+border-radius: 9px;
+}
+
+
+
+</style>
+
+<div class="brder">
+
+
+
+
+{{#if user}}
+  <p class="head">Email: {{ user.email }}</p>
+  <p class="head" >Username: {{ user.name }}</p>
+ 
+<div class="main">
+
+
+<div class="button1">
+
+   <button   class="bttn" type="button"   style="width: 120px ; height:50px; " data-bs-toggle="modal" data-bs-target="#myModal" id="editButton" onclick="fetchUserData('{{ user._id }}', '{{ user.name }}', '{{ user.email }}')">
+      Edit
+    </button>
+</div>
+<a    href="/delete">
+<div class="button2">
+ <button  class="bttn2"  style="width: 120px ; height:50px ; " type="button"  onclick="deleteUser()">Delete</button>
+</a>
+</div>
+<div class="button3">
+
+<a    href="/logout">
+  <button   class="bttn3" style="width: 120px ; height:50px; " >   Logout</button>
+</a>
+
+</div>
+
+
+
+
+</div>
+</div>
+
+
+
+
+  
+  <div class="container mt-5">
+
+
+ 
+  </div>
+{{else}}
+  <p>Please log in to view user data.</p>
+{{/if}}
+
+<body>
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Edit User Data</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+        <form id="editForm">
+          <!-- Hidden input field to store the user ID -->
+          <input type="hidden" id="userId">
+          <div class="mb-3">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" class="form-control">
+            <div id="nameValidationMessage" class="text-danger"></div>
+          </div>
+          <div class="mb-3">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" class="form-control">
+            <div id="emailValidationMessage" class="text-danger"></div>
+          </div>
+        </form>
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+      <a href="/close"> <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button></a> 
+        <button type="button" class="btn btn-danger" id="saveButton" onclick="updateUser()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function validateForm() {
+    var name = document.getElementById("name").value;
+    var email = document.getElementById("email").value;
+    var nameValidationMessage = document.getElementById("nameValidationMessage");
+    var emailValidationMessage = document.getElementById("emailValidationMessage");
+    var valid = true;
+
+  
+    if (!name.trim()) {
+      nameValidationMessage.innerHTML = "Name is required.";
+      valid = false;
+    } else {
+      nameValidationMessage.innerHTML = "";
+    }
+
+    if (!email.trim()) {
+      emailValidationMessage.innerHTML = "Email is required.";
+      valid = false;
+    } else if (!isValidEmail(email)) {
+      emailValidationMessage.innerHTML = "Invalid email format.";
+      valid = false;
+    } else {
+      emailValidationMessage.innerHTML = "";
+    }
+
+    return valid;
+  }
+
+  // Function to validate email format
+  function isValidEmail(email) {
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+
+  function updateUser() {
+    if (validateForm()) {
+   
+    }
+  }
+</script>
+
+  
+
+
+    <script>
+      function deleteUser() {
+        fetch(`/delete/`, {
+          method: 'DELETE',
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('Delete request failed');
+            } else {
+              document.location.href = "/"
+            }
+
+          })
+          .catch((error) => {
+            console.error(error);
+
+          });
+      }
+    </script>
+
+</div>
+
+
+
+
+
+<script>
+  const nameInput = document.getElementById('name');
+  const emailInput = document.getElementById('email');
+  const userIdInput = document.getElementById('userId');
+
+  function fetchUserData(id, name, email) {
+    userIdInput.value = id || '';
+    nameInput.value = name || '';
+    emailInput.value = email || '';
+  }
+
+  function updateUser() {
+    const updatedName = nameInput.value;
+    const updatedEmail = emailInput.value;
+    const userId = userIdInput.value;
+
+    fetch('/edit', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        _id: userId,
+        name: updatedName,
+        email: updatedEmail,
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Failed to update user data');
+        }
+        
+        alert('Data saved successfully!'); 
+        
+  
+      })
+       
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+
+
+   
+
+   
+
+
+
+</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
+  
+</body>

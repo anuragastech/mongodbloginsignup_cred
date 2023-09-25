@@ -1,0 +1,269 @@
+{{!-- <h1>{{title}}</h1>
+<p>Welcome to {{title}}</p> --}}
+
+
+
+
+<h1>Welcome to the Home Page</h1>
+
+  <!DOCTYPE html>
+  <!-- codingflicks.com -->
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <title>Bootstrap 5 Modal Login Form</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css">
+      <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    
+
+
+
+
+<STYle>
+
+
+
+    
+    
+    
+    
+
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+  .modal-body {
+    padding: 0;
+  }
+  .btn-close {
+    position: absolute;
+    right: 0;
+    padding: 1em;
+  }
+  .form-area h1 {
+    font-size: 2.3em;
+    font-weight: bold;
+  }
+  .form-area {
+	padding: 3em;
+	max-width: 100%;
+	color: #fff;
+	box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.5);
+} 
+  
+  .form-control {
+    background-color: 
+    color: #fff;
+    padding-left: 0;
+    border: 1px solid #fff;
+    border-radius: 0;
+  }
+  .form-area .btn {
+	width: 100%;
+	font-weight: 800;
+	background-color: #fff;
+	padding: 0.5em 0;
+	border-radius: 50px;
+}
+.btn.btn-secondary {
+	padding: 15px 50px;
+	font-family: alfa slab one;
+	font-size: 20px;
+	letter-spacing: 2px;
+	border-radius: 50px;
+}
+/* hover***************************************** */
+  .form-area .btn:hover {
+    /* background-color: inherit; */
+    color: #1a0c0c;
+    border-color: #289c5d;
+    background-color: black;
+  }
+  .form-area p {
+    text-align: center;
+    padding-top: 2em;
+    color: #fff;
+  }
+  .form-area p a {
+    color: #e1e1e1;
+    text-decoration: none;
+  }
+  .form-area p a:hover {
+    color: #fff;
+  }
+
+  @media (max-width: 600px){
+    .form-area{
+        padding: 1.5em;
+    }
+    .form-area h1{
+        font-size: 18px;
+    }
+  }
+
+</STYle>
+
+
+<!-- Button to trigger the modal -->
+<button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#ModalForm">
+  Login
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="ModalForm" tabindex="-1" aria-labelledby="ModalFormLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <!-- Close button for the modal -->
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        
+        <!-- Form area within the modal -->
+        <div class="form-area bg-#fff">
+          <!-- Title for the login form -->
+          <h1 class="text-center text-primary">Login Form</h1>
+          
+          <!-- Form starts here -->
+          <form action="/login" method="POST" onsubmit="return validateLoginForm()">
+            <!-- Email input field -->
+            <div class="mb-3 mt-4">
+              <label for="exampleInputEmail1" class="form-label text-primary" style="font-weight: bolder;">Email Id</label>
+              <input type="email" name="email" style="border: 1px solid blue;" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <div id="emailValidationMessage" class="text-danger"></div>
+            </div>
+            
+            <!-- Password input field -->
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label text-primary" style="font-weight: bolder;">User Password</label>
+              <input type="password" name="password" style="border: 1px solid blue;" class="form-control" id="exampleInputPassword1">
+              <div id="passwordValidationMessage" class="text-danger"></div>
+            </div>
+            
+            <!-- Login button -->
+            <button type="submit" class="btn btn-light bg-primary text-white mt-3">LOGIN</button>
+            
+            <!-- Signup link -->
+            <p class="text-primary">New Here? <a class="text-dark" href="signup">Signup</a></p>
+          </form>
+          <!-- Form ends here -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function validateLoginForm() {
+    var email = document.getElementById("exampleInputEmail1").value;
+    var password = document.getElementById("exampleInputPassword1").value;
+    var emailValidationMessage = document.getElementById("emailValidationMessage");
+    var passwordValidationMessage = document.getElementById("passwordValidationMessage");
+    var valid = true;
+
+    // Email validation
+    if (!email) {
+      emailValidationMessage.innerHTML = "Email is required.";
+      valid = false;
+    } else {
+      emailValidationMessage.innerHTML = "";
+    }
+
+    // Password validation (add your own criteria)
+    if (!password) {
+      passwordValidationMessage.innerHTML = "Password is required.";
+      valid = false;
+    } else if (password.length < 8) {
+      passwordValidationMessage.innerHTML = "Password must be at least 8 characters.";
+      valid = false;
+    } else {
+      passwordValidationMessage.innerHTML = "";
+    }
+
+    return valid;
+  }
+</script>
+
+
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
+  </body>
+  </html>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+
+{{!-- 
+
+<style>
+    body{
+        text-align: center;
+        background-color: black;
+        
+    }
+    form{
+      border-radius: 45
+      PX;
+        border: 10px solid gray;
+        height: 500px;
+        padding-top: 100px;
+        background-color: ghostwhite;
+        color: black;
+        width: 650px;
+        align-items: center;
+margin-left: 600px;
+margin-top: 100px;
+    
+      }
+      label{
+        color: black;
+    
+        font-size: 35px;
+      }
+      button{
+        height: 50px;
+        width: 400px;
+        background-color:white;
+        font-size: 20px;
+      }
+      input{
+        font-size: large;
+        height: 35px;
+
+      } --}}
+    {{!-- </style>
+    
+    
+    <form action="/login" method="POST"  >
+
+        <h1 >Log in page</h1>
+    
+      <label for="">login</label>
+      <input type="text" name="email"><br><br>
+      
+      <label for="">password</label>
+      <input type="password" name="password"><br><br>
+      
+      <button type="submit">Sign in</button><br>
+
+
+        <a href="signup">create new account</a>
+    
+    </form> --}}

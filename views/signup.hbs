@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {{!-- <title>{{title}}</title> --}}
+  
+    <title>Your Page Title</title>  
+    <link rel='stylesheet' href='/stylesheets/style.css' >
+
+
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<link rel= "stylesheet " href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+  <style>
+
+    body{
+        background-color: black;
+        
+         }
+         form{
+       
+            height: 450px;
+         }
+    
+    .gradient-custom-3 {
+      background: #131414;
+      background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5));
+      background: black;
+    }
+
+    .gradient-custom-4 {
+   
+      background: #84fab0;
+      background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1));
+      background: linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1));
+    }
+  </style>
+</head>
+<body>
+
+
+
+ <section class="vh-100 bg-image" style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                    <div class="card" style="border-radius: 13px;">
+                        <div class="card-body p-5">
+                            <h2 class="text-uppercase text-center mb-5">Create Account</h2>
+
+                            <form action="/submit" method="POST" name="myform" id="submit-form" onsubmit="return validateForm();">
+
+                                <div class="form-outline mb-4">
+                                    <input type="text" id="form3Example1cg" class="form-control form-control-lg" name="name" />
+                                    <label class="form-label" for="username"> Your Name</label>
+                                    <span id="message" class="text-danger font-weight" style="font-size: 16px;"></span>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <input type="email" id="form3Example3cg" class="form-control form-control-lg" name="email" />
+                                    <label class="form-label" for="email">Your Email</label>
+                                    <span id="messageMail" class="text-danger " style="font-size: 16px;"></span>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <input type="password" id="form3Example4cg" class="form-control form-control-lg" name="password" />
+                                    <label class="form-label" for="password">Password</label>
+                                    <span id="messagePassword" class="text-danger " style="font-size: 16px;"></span>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <input type="password" id="form3Example4cdg" class="form-control form-control-lg" name="repeatPassword" />
+                                    <label class="form-label" for="password">Repeat your password</label>
+                                    <span id="messageRepeatPassword" class="text-danger font-weight" style="font-size: 16px;"></span>
+                                </div>
+
+                                <div class="form-check d-flex justify-content-center mb-5"></div>
+
+                                <button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
+                            </form><br>
+
+                            <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="/" class="fw-bold text-body"><u>Login here</u></a></p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    function validateForm() {
+        var name = document.forms["myform"]["name"].value;
+        var email = document.forms["myform"]["email"].value;
+        var password = document.forms["myform"]["password"].value;
+        var repeatPassword = document.forms["myform"]["repeatPassword"].value;
+
+        var nameError = document.getElementById("message");
+        var emailError = document.getElementById("messageMail");
+        var passwordError = document.getElementById("messagePassword");
+        var repeatPasswordError = document.getElementById("messageRepeatPassword");
+
+        
+        if (name === "") {
+            nameError.innerHTML = "Please fill in your name";
+            return false;
+        }
+        nameError.innerHTML = "";
+
+        
+        if (email === "") {
+            emailError.innerHTML = "Please fill in your email";
+            return false;
+        }
+        if (email.indexOf('@') <= 0 || (email.charAt(email.length - 4) !== '.' && email.charAt(email.length - 3) !== '.')) {
+            emailError.innerHTML = "Invalid email format";
+            return false;
+        }
+        emailError.innerHTML = "";
+
+      
+        if (password === "") {
+            passwordError.innerHTML = "Please fill in your password";
+            return false;
+        }
+        if (password.length < 8) {
+            passwordError.innerHTML = "Password must be at least 8 characters";
+            return false;
+        }
+        passwordError.innerHTML = "";
+
+      
+        if (repeatPassword !== password) {
+            repeatPasswordError.innerHTML = "Passwords do not match";
+            return false;
+        }
+        repeatPasswordError.innerHTML = "";
+
+        return true;
+    }
+</script>
+
+
+    {{!-- {{{body}}} --}}
+  </body>
+</html>
